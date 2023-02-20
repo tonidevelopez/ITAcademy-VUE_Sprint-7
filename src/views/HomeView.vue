@@ -4,14 +4,20 @@
     <p v-for="servei in serveis" :key="servei.id">
       <input type="checkbox" :id="servei.id" :value="servei.preu" v-model="serveiChecked" @change="calcularTotal">
       {{ servei.descripcio }}
+    <div v-if="servei.id === 1 && serveiChecked.includes(500)">
+      <Panell @calcPagines="calcPagines" @calcIdiomes="calcIdiomes" />
+    </div>
     </p>
     <p>Preu: {{ preuTotal }}€</p>
   </div>
 </template>
 
 <script>
+import Panell from '../components/Panell.vue'
+
 export default {
   name: 'HomeView',
+  components: { Panell },
   data() {
     return {
       serveis: [
@@ -32,16 +38,30 @@ export default {
         }
       ],
       preuTotal: 0,
-      serveiChecked: []
+      serveiChecked: [],
+      numPagines: 1,
+      numIdiomes: 1
     }
   },
   methods: {
     calcularTotal() {
       this.preuTotal = 0
       this.preuTotal += this.serveiChecked.reduce((a, b) => a + b, 0)
-
-      console.log(this.serveiChecked)
-    }
+      if (this.serveiChecked.includes(500)) {
+        this.preuTotal += this.numPagines * this.numIdiomes * 30
+      } else {
+        this.numPagines = 1
+        this.numIdiomes = 1
+      }
+    },
+    calcPagines(value) {
+      this.numPagines = value;
+      this.calcularTotal()
+    },
+    calcIdiomes(value) {
+      this.numIdiomes = value;
+      this.calcularTotal()
+    },
   }
 }
 </script>
