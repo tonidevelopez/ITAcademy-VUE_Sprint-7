@@ -1,14 +1,16 @@
 <template>
-  <div>
-    <p>Què vols fer?</p>
-    <p v-for="servei in serveis" :key="servei.id">
-      <input type="checkbox" :id="servei.id" :value="servei.preu" v-model="serveiChecked" @change="calcularTotal">
-      {{ servei.descripcio }}
-    <div v-if="servei.id === 1 && serveiChecked.includes(500)">
-      <Panell @calcPagines="calcPagines" @calcIdiomes="calcIdiomes" />
+  <div id="pressupost">
+    <div id="serveis">
+      <p>Què vols fer?</p>
+      <p v-for="servei in serveis" :key="servei.id">
+        <input type="checkbox" :id="servei.id" :value="servei.preu" v-model="serveiChecked" @change="calcularTotal">
+        {{ servei.descripcio }}
+      <div v-if="servei.id === 1 && serveiChecked.includes(500)">
+        <Panell @calcPagines="calcPagines" @calcIdiomes="calcIdiomes" />
+      </div>
+      </p>
+      <p id="preu">Preu: {{ preuTotal }}€</p>
     </div>
-    </p>
-    <p>Preu: {{ preuTotal }}€</p>
   </div>
 </template>
 
@@ -65,3 +67,22 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+#pressupost {
+  display: flex;
+  justify-content: center;
+}
+
+#serveis {
+  background-color: orange;
+  width: 300px;
+  padding: 0 20px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px gray;
+}
+
+#preu {
+  font-weight: bold;
+}
+</style>

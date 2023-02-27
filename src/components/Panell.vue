@@ -43,6 +43,7 @@ export default {
     padding: 20px;
     margin: 5px;
     line-height: 3rem;
+    background-color: white;
 }
 
 .inputs {

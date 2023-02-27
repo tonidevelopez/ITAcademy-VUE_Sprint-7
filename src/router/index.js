@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import Benvinguda from '../views/Benvinguda.vue'
 import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
@@ -6,6 +7,11 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'benvinguda',
+      component: Benvinguda
+    },
+    {
+      path: '/home',
       name: 'home',
       component: HomeView
     }
