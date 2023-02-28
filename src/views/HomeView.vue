@@ -1,7 +1,7 @@
 <template>
   <div id="pressupost">
     <div id="serveis">
-      <p>Què vols fer?</p>
+      <p id="titol">Què vols fer?</p>
       <p v-for="servei in serveis" :key="servei.id">
         <input type="checkbox" :id="servei.id" :value="servei.preu" v-model="serveiChecked" @change="calcularTotal">
         {{ servei.descripcio }}
@@ -76,13 +76,18 @@ export default {
 
 #serveis {
   background-color: orange;
-  width: 300px;
-  padding: 0 20px;
+  width: 360px;
+  padding: 10px 20px 0px;
   border-radius: 10px;
   box-shadow: 5px 5px 5px gray;
 }
 
+#titol {
+  font-weight: bold;
+}
+
 #preu {
   font-weight: bold;
+  font-size: 1.3rem;
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
     <div class="botons">
-        <button @click="sumarQuantitat">+</button>
+        <button class="btn btn-warning" @click="sumarQuantitat">+</button>
         <input type="number" v-model="quantitat">
-        <button @click="restarQuantitat">-</button>
+        <button class="btn btn-warning" @click="restarQuantitat">-</button>
     </div>
 </template>
 
@@ -48,8 +48,10 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 input[type=number] {
-    width: 1.5rem;
+    width: 2rem;
+    height: 2rem;
     border: none;
+    text-align: center;
 }
 
 .botons {
@@ -61,9 +63,12 @@ button {
     background-color: orange;
     color: white;
     border: none;
-    border-radius: 5px;
     width: 2rem;
-    height: 2rem;
     font-size: 1.5rem;
+    padding: 0;
+}
+
+button:active {
+    background-color: gray;
 }
 </style>
