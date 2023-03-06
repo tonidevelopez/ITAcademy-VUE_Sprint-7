@@ -11,15 +11,26 @@
       </p>
       <p id="preu">Preu: {{ preuTotal }}€</p>
     </div>
+    <div class="namePressupost">
+      <label for="nomPressupost">Nom del pressupost:</label>
+      <input type="text" id="nomPressupost" v-model="nomPressupost">
+      <label for="nomClient">Client:</label>
+      <input type="text" id="nomClient" v-model="nomClient">
+    </div>
+    <button class="btn btn-primary btn-sm" @click="guardaPressupost">Guardar Pressupost</button>
+  </div>
+  <div>
+    <PressupostList :llistaPressupost="llistaPressupost" />
   </div>
 </template>
 
 <script>
 import Panell from '../components/Panell.vue'
+import PressupostList from '../components/PressupostList.vue'
 
 export default {
   name: 'HomeView',
-  components: { Panell },
+  components: { Panell, PressupostList },
   data() {
     return {
       serveis: [
@@ -42,7 +53,10 @@ export default {
       preuTotal: 0,
       serveiChecked: [],
       numPagines: 1,
-      numIdiomes: 1
+      numIdiomes: 1,
+      nomPressupost: "",
+      nomClient: "",
+      llistaPressupost: []
     }
   },
   methods: {
@@ -64,6 +78,22 @@ export default {
       this.numIdiomes = value;
       this.calcularTotal()
     },
+    guardaPressupost() {
+      if (this.nomPressupost != "" && this.nomClient != "" && this.preuTotal != 0) {
+        this.llistaPressupost.push({
+          nomPressupost: this.nomPressupost,
+          nomClient: this.nomClient,
+          preuTotal: this.preuTotal,
+        })
+        this.nomClient = ""
+        this.nomPressupost = ""
+        this.serveiChecked = []
+        this.preuTotal = 0
+      } else {
+        alert("Has d'omplir tots els camps i seleccionar almenys un servei")
+      }
+      console.table(this.llistaPressupost)
+    }
   }
 }
 </script>
@@ -71,7 +101,9 @@ export default {
 <style scoped>
 #pressupost {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
 }
 
 #serveis {
@@ -89,5 +121,11 @@ export default {
 #preu {
   font-weight: bold;
   font-size: 1.3rem;
+}
+
+.namePressupost {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
 }
 </style>
