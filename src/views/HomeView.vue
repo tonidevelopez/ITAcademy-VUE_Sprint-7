@@ -84,6 +84,7 @@ export default {
           nomPressupost: this.nomPressupost,
           nomClient: this.nomClient,
           preuTotal: this.preuTotal,
+          data: new Date()
         })
         this.nomClient = ""
         this.nomPressupost = ""
